@@ -1,0 +1,180 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>후원약정 진행 단계</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background:#f5f5f5;
+    font-family:Arial, sans-serif;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+    padding:20px;
+}
+
+.container{
+    width:100%;
+    max-width:420px;
+    background:#fff;
+    border-radius:24px;
+    padding:35px 28px;
+    box-shadow:0 8px 30px rgba(0,0,0,0.08);
+}
+
+.step-wrap{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    margin-bottom:40px;
+    position:relative;
+}
+
+.step-wrap::before{
+    content:"";
+    position:absolute;
+    top:22px;
+    left:35px;
+    right:35px;
+    border-top:3px dotted #d3d3d3;
+    z-index:0;
+}
+
+.step{
+    position:relative;
+    z-index:1;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    width:25%;
+}
+
+.circle{
+    width:46px;
+    height:46px;
+    border-radius:50%;
+    background:#cfd7df;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:white;
+    font-size:18px;
+    margin-bottom:10px;
+}
+
+.step.active .circle{
+    background:#4d8df7;
+}
+
+.step-text{
+    font-size:14px;
+    color:#999;
+    text-align:center;
+    line-height:1.4;
+}
+
+.step.active .step-text{
+    color:#4d8df7;
+    font-weight:600;
+}
+
+.title{
+    text-align:center;
+    font-size:24px;
+    font-weight:700;
+    margin-bottom:15px;
+}
+
+.sub-text{
+    text-align:center;
+    color:#666;
+    line-height:1.8;
+    font-size:15px;
+    margin-bottom:35px;
+}
+
+.submit-btn{
+    width:100%;
+    border:none;
+    border-radius:14px;
+    background:#4d8df7;
+    color:white;
+    padding:16px;
+    font-size:17px;
+    font-weight:600;
+    cursor:pointer;
+}
+
+.submit-btn:hover{
+    opacity:0.92;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="step-wrap">
+
+        <div class="step">
+            <div class="circle">1</div>
+            <div class="step-text">약정서 작성</div>
+        </div>
+
+        <div class="step">
+            <div class="circle">2</div>
+            <div class="step-text">사진 촬영</div>
+        </div>
+
+        <div class="step active">
+            <div class="circle">3</div>
+            <div class="step-text">약정서 제출</div>
+        </div>
+
+        <div class="step">
+            <div class="circle">4</div>
+            <div class="step-text">기부금 납입</div>
+        </div>
+
+    </div>
+
+    <div class="title">
+        가톨릭중앙의료원 후원약정
+    </div>
+
+    <div class="sub-text">
+        먼저 작성하신 약정서를 사진으로 촬영 해주세요.<br>
+        그 후 화면으로 돌아와 제출하기 버튼을 누르면<br> 
+        약정서를 보내주실 문자메세지 창으로 연결됩니다.
+    </div>
+
+    <button class="submit-btn" onclick="sendSMS()">
+        ✉️ 제출하기
+    </button>
+
+</div>
+
+<script>
+function sendSMS(){
+
+    const phone = "15993146";
+
+    const text = "[안내사항]\n해당 번호로 촬영하신 약정서를 첨부하여 보내주시기 바랍니다.\n\n발송 후 우리은행 1005-700-920886 (예금주: 가톨릭중앙의료원) 계좌로 기부금을 입금해주시면 납입 절차가 완료됩니다.\n입금 시 입금자명은 '생년월일+성함'으로 기재해 주시기 바랍니다.\n\n소중한 나눔에 진심으로 감사합니다😊";
+
+    window.location.href =
+        `sms:${phone}?body=${encodeURIComponent(text)}`;
+}
+</script>
+
+</body>
+</html>
